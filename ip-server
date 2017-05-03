@@ -1,0 +1,181 @@
+#!env/bin/python
+from api.server import app
+from database import client
+import os.path, config, psutil
+import rpc.tao as blockchain 
+import logging
+from logging.handlers import RotatingFileHandler
+from daemon import runner
+import threading
+from protocol import identity
+from protocol.messages import ProcessWaitingMessages
+
+@app.teardown_appcontext
+def CloseDB(error):
+	"""Closes the database again at the end of the request."""
+	client.OpenDB().close()
+
+class AppStart(object):
+	def __init__(self):
+	   self.root = '/Users/bryceweiner/Documents/Repo/pyinfiniti'
+	   self.stdin_path = '/dev/null'
+	   self.stdout_path = '/dev/stdout'
+	   self.stderr_path = os.path.join(self.root, 'ip-server.web.log')
+	   self.pidfile_path = os.path.join(self.root,'ip-server.pid')
+	   self.pidfile_timeout = 1
+	   self.logfile_path = os.path.join(self.root,'ip-server.debug.log')
+
+	def __del__(self):
+		global taoSyncStop
+		app.logger.info("Shutting down.")
+		blockchainSyncStop.set()
+
+	def run(self):
+		formatter = logging.Formatter(
+			#"[%(asctime)s] {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s")
+			"[%(asctime)s] %(levelname)s: %(message)s")
+		handler = RotatingFileHandler(self.logfile_path, maxBytes=10000000, backupCount=10)
+		handler.setLevel(logging.INFO)
+		handler.setFormatter(formatter)
+		app.logger.setLevel(logging.INFO)
+		app.logger.addHandler(handler)
+		app.logger.info("***************************************************************************************************************")
+		app.logger.info("Infiniti Protocol API Server Starting")
+		# If the database doesn't exist, create it
+		# Right now we'll just use SQLite
+		with app.app_context():
+			app.logger.info("Opening database.")
+			client.InitDB(app)
+
+		# Check to see if blockchain client is running
+		running = False
+		for proc in psutil.process_iter():
+			if proc.name().find(chains[chains['active']]['gui-process']) >= 0:
+				running = True
+			elif proc.name().find(chains[chains['active']]['daemon-process']) >= 0:
+				running = True
+		if running:
+			client.UpdateChainStatus('XTO','OK')
+		else:
+			client.UpdateChainStatus('XTO','OFFLINE')	
+			app.logger.error('XTO client is not running.')    # the exception instance
+	
+		BlockchainSyncThreadStart()
+		app.run(debug=True, use_reloader=False, threaded=True, port=8000)
+
+def BlockchainSync(): 
+	global blockchainSyncStop
+	global blockchainSyncThread
+
+	while (not blockchainSyncStop.is_set()):
+		with blockchainSyncLock:
+			try:
+				blockchain.SyncChain(app,False)
+				blockchain.ScanMempool(app)
+				ProcessWaitingMessages(app)
+				if blockchain.CheckBalance(app) < 1:
+					func = request.environ.get('werkzeug.server.shutdown')
+					if func is None:
+						raise RuntimeError('Not running with the Werkzeug Server')
+					func()	
+			except Exception as inst:
+				client.UpdateChainStatus('XTO','OFFLINE')
+				if inst.args[0] != 61:
+					import sys,traceback
+					exc_type, exc_value, exc_traceback = sys.exc_info()
+					print "*** print_tb:"
+					traceback.print_tb(exc_traceback, limit=1, file=sys.stdout)
+					app.logger.error( "*** print_exception:")
+					traceback.print_exception(exc_type, exc_value, exc_traceback,
+					                          limit=2, file=sys.stdout)
+					app.logger.error( "*** print_exc:")
+					traceback.print_exc()
+					app.logger.error( "*** format_exc, first and last line:")
+					formatted_lines = traceback.format_exc().splitlines()
+					app.logger.error( formatted_lines[0])
+					app.logger.error( formatted_lines[-1])
+					app.logger.error( "*** format_exception:")
+					app.logger.error( repr(traceback.format_exception(exc_type, exc_value,
+					                                      exc_traceback)))
+					app.logger.error( "*** extract_tb:")
+					app.logger.error( repr(traceback.extract_tb(exc_traceback)))
+					app.logger.error( "*** format_tb:")
+					app.logger.error( repr(traceback.format_tb(exc_traceback)))
+					app.logger.error( "*** tb_lineno:", exc_traceback.tb_lineno)
+					app.logger.error(type(inst))    # the exception instance
+					app.logger.error(inst.args)     # arguments stored in .args
+					app.logger.error(inst)
+		blockchainSyncStop.wait(POOL_TIME)
+
+def BlockchainSyncThreadStart():
+	global blockchainSyncThread
+	app.logger.info("Starting Tao background synchronizer thread.")
+	blockchainSyncThread.start()
+
+import protocol.identity
+import protocol.messages
+from protocol.identity import Identity
+from protocol.messages import *
+
+def run_tests():
+	client.InitDB()
+	protocol.identity.Test()
+
+	passphrase = "Test passphrase."
+
+	i = Identity(passphrase)
+
+	im = IdentityMessage(i)
+	assert im.isValid()
+	obj = ObjectMessage().Build('Identity', im.Serialize(), OBJECT_TYPE['identity'], ISSUE_MODE['none'])
+	assert obj.isValid()
+	serialize = Message().Build(MESSAGES['create'], obj.Serialize(), i.Key(), APP_ID[0]) #ID is always 0
+	assert serialize.isValid()
+	string = serialize.Serialize()
+	deserialize = Message().Deserialize(string)
+	assert deserialize.isSignatureValid()
+	dobj = ObjectMessage().Deserialize(deserialize.Metadata())
+	assert dobj.isValid()
+	dim = IdentityMessage().Deserialize(dobj.Metadata())
+	assert dim.isValid()
+	assert im.Fingerprint() == dim.Fingerprint()
+	client.SaveIdentityMessage(serialize,obj,im,i)
+
+	k = i.Key(CreateKeyFingerprint())
+	fp = FingerprintMessage(k)
+	assert fp.isValid()
+	obj = ObjectMessage().Build('Fingerprint', fp.Serialize(), OBJECT_TYPE['fingerprint'], ISSUE_MODE['none'])
+	assert obj.isValid()
+	serialize = Message().Build(MESSAGES['create'], obj.Serialize(), i.Key(), APP_ID[0]) #Fingerprint is always 0
+	assert serialize.isValid()
+	string = serialize.Serialize()
+	deserialize = Message().Deserialize(string)
+	assert deserialize.isSignatureValid()
+	dobj = ObjectMessage().Deserialize(deserialize.Metadata())
+	assert dobj.isValid()
+	dfp = FingerprintMessage().Deserialize(dobj.Metadata())
+	assert dfp.isValid()
+	assert fp.Fingerprint() == dfp.Fingerprint()
+	dk = i.Key(dfp.Fingerprint())
+	assert k.PublicKey() == dk.PublicKey()
+	print "Protocol message tests passed."
+
+
+POOL_TIME = 5 #Seconds
+
+# thread handler
+blockchainSyncStop = threading.Event()
+blockchainSyncThread = threading.Thread(target=BlockchainSync)
+blockchainSyncLock = threading.Lock()
+
+if __name__ == '__main__':
+	import argparse
+
+	parser = argparse.ArgumentParser(description='Infiniti Protocol Server.')
+	parser.add_argument('command', help='Valid commands are: test start stop restart')
+	args = parser.parse_args()
+	if args.command is not None:
+		if args.command == 'test':
+			run_tests()
+		else:
+			runner.DaemonRunner(AppStart()).do_action()

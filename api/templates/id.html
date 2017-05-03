@@ -1,0 +1,186 @@
+{% extends 'base.html' %}
+{% block content %}
+		<div class="display-animation">
+			<div class="row image-row">
+				<div class="col-md-12">
+					<div class="panel">
+						<div class="panel-heading">
+							<div class="panel-title"><h4>BASIC FORM ELEMENTS</h4></div>
+						</div><!--.panel-heading-->
+						<div class="panel-body">
+
+							<div class="row example-row">
+								<div class="col-md-3">Text Inputs</div><!--.col-md-3-->
+								<div class="col-md-9">
+
+									<div class="inputer">
+										<div class="input-wrapper">
+											<input type="text" class="form-control" placeholder="Text placeholder">
+										</div>
+									</div>
+
+									<div class="inputer floating-label">
+										<div class="input-wrapper">
+											<input type="text" class="form-control" id="exampleInput1">
+											<label for="exampleInput1">Floating label</label>
+										</div>
+									</div>
+
+									<div class="input-group">
+										<span class="input-group-addon"><i class="ion-android-call"></i></span>
+										<div class="inputer">
+											<div class="input-wrapper">
+												<input type="text" class="form-control" placeholder="With icon">
+											</div>
+										</div>
+									</div>
+
+									<div class="inputer">
+										<div class="input-wrapper disabled">
+											<input class="form-control" id="disabledInput" type="text" placeholder="Disabled input" disabled="">
+										</div>
+									</div>
+
+								</div><!--.col-md-9-->
+							</div><!--.row-->
+
+							<div class="row example-row">
+								<div class="col-md-3">Checkboxes and Radios</div><!--.col-md-3-->
+								<div class="col-md-9">
+									<div class="checkboxer">
+										<input type="checkbox" value="" id="check1">
+										<label for="check1">Option one is this</label>
+									</div><!--.checkbox-->
+									<div class="checkboxer disabled">
+										<input type="checkbox" value="" id="check2" disabled="">
+										<label for="check2">Option two is disabled</label>
+									</div><!--.checkbox-->
+
+									<div class="radioer">
+										<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+										<label for="optionsRadios1">Option one is this</label>
+									</div><!--.radio-->
+									<div class="radioer">
+										<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+										<label for="optionsRadios2">Option two can be something else</label>
+									</div><!--.radio-->
+									<div class="radioer disabled">
+										<input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" disabled="">
+										<label for="optionsRadios3">Option three is disabled</label>
+									</div><!--.radio-->
+								</div><!--.col-md-9-->
+							</div><!--.row-->
+
+							<div class="row example-row">
+								<div class="col-md-3">Switchers</div><!--.col-md-3-->
+								<div class="col-md-9">
+									<div class="switcher">
+										<input id="switcher1" type="checkbox" hidden="hidden">
+										<label for="switcher1"></label>
+									</div><!--.switcher-->
+								</div><!--.col-md-9-->
+							</div><!--.row-->
+
+							<div class="row example-row">
+								<div class="col-md-3">Inline Checkboxes and Radios</div><!--.col-md-3-->
+								<div class="col-md-9">
+
+									<div class="clearfix margin-bottom-10">
+										<div class="checkboxer form-inline">
+											<input type="checkbox" id="inlineCheckbox1" value="option1">
+											<label for="inlineCheckbox1">1</label>
+										</div>
+										<div class="checkboxer form-inline">
+											<input type="checkbox" id="inlineCheckbox2" value="option2">
+											<label for="inlineCheckbox2">2</label>
+										</div>
+										<div class="checkboxer form-inline">
+											<input type="checkbox" id="inlineCheckbox3" value="option3">
+											<label for="inlineCheckbox3">3</label>
+										</div>
+									</div>
+
+									<div class="clearfix">
+
+										<div class="radioer form-inline">
+											<input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+											<label for="inlineRadio1">1</label>
+										</div>
+										<div class="radioer form-inline">
+											<input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+											<label for="inlineRadio2">2</label>
+										</div>
+										<div class="radioer form-inline">
+											<input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+											<label for="inlineRadio3">3</label>
+										</div>
+
+									</div>
+								</div><!--.col-md-9-->
+							</div><!--.row-->
+
+							<div class="row example-row">
+								<div class="col-md-3">Selectbox</div><!--.col-md-3-->
+								<div class="col-md-9">
+									<select class="selecter" style="display: none;">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+									</select><div class="btn-group bootstrap-select selecter"><button type="button" class="btn dropdown-toggle btn-default btn-ripple" data-toggle="dropdown" title="1"><span class="filter-option pull-left">1</span>&nbsp;<span class="caret"></span></button><div class="dropdown-menu open"><ul class="dropdown-menu inner" role="menu"><li data-original-index="0" class="selected"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>1</span>" data-tokens="null"><span class="text">1</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="1"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>2</span>" data-tokens="null"><span class="text">2</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="2"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>3</span>" data-tokens="null"><span class="text">3</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="3"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>4</span>" data-tokens="null"><span class="text">4</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="4"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>5</span>" data-tokens="null"><span class="text">5</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li></ul></div></div>
+								</div><!--.col-md-9-->
+							</div><!--.row-->
+
+							<div class="row example-row">
+								<div class="col-md-3">Multiple Selectbox</div><!--.col-md-3-->
+								<div class="col-md-9">
+									<select multiple="" class="selecter" style="display: none;">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+									</select><div class="btn-group bootstrap-select show-tick selecter"><button type="button" class="btn dropdown-toggle btn-default btn-ripple" data-toggle="dropdown" title="Nothing selected"><span class="filter-option pull-left">Nothing selected</span>&nbsp;<span class="caret"></span></button><div class="dropdown-menu open"><ul class="dropdown-menu inner" role="menu"><li data-original-index="0"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>1</span>" data-tokens="null"><span class="text">1</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="1"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>2</span>" data-tokens="null"><span class="text">2</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="2"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>3</span>" data-tokens="null"><span class="text">3</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="3"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>4</span>" data-tokens="null"><span class="text">4</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="4"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>5</span>" data-tokens="null"><span class="text">5</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li></ul></div></div>
+								</div><!--.col-md-9-->
+							</div><!--.row-->
+
+							<div class="row example-row">
+								<div class="col-md-3">Textarea</div><!--.col-md-3-->
+								<div class="col-md-9">
+									<div class="inputer">
+										<div class="input-wrapper">
+											<textarea class="form-control" rows="3" placeholder="Normal textarea"></textarea>
+										</div>
+									</div>
+								</div><!--.col-md-9-->
+							</div><!--.row-->
+
+							<div class="row example-row">
+								<div class="col-md-3">Autosize Textarea</div><!--.col-md-3-->
+								<div class="col-md-9">
+									<div class="inputer">
+										<div class="input-wrapper">
+											<textarea class="form-control js-auto-size" rows="1" placeholder="Autosize textarea"></textarea>
+										</div>
+									</div>
+								</div><!--.col-md-9-->
+							</div><!--.row-->
+
+							<div class="row example-row">
+								<div class="col-md-3">File Input</div><!--.col-md-3-->
+								<div class="col-md-9">
+									<div class="form-group">
+										<label for="exampleInputFile">File input</label>
+										<input type="file" id="exampleInputFile">
+										<p class="help-block">Example block-level help text here.</p>
+									</div><!--.form-group-->
+								</div><!--.col-md-9-->
+							</div><!--.row-->
+						</div><!--.panel-body-->
+					</div>
+				</div><!--.col-->
+			</div><!--.row-->
+		</div><!--.display-animation-->
+
+{% endblock %}

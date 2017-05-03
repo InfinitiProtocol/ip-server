@@ -1,0 +1,121 @@
+syntax = "proto3";
+
+package Infiniti;
+
+
+message Message {
+  enum MessageTypes {
+    CREATE = 0;
+    UPDATE = 1;
+    TRANSFER = 2;
+  }
+  int32 version = 1;
+  bytes application_id = 2;
+  MessageTypes message_type = 3;
+  bytes metadata = 4;
+  bytes issued = 5;
+  bytes issuer = 6;
+  bytes signature = 7;
+}
+
+message Object {
+  enum EncryptionTypes {
+    UNENC = 0;
+    AES = 1;
+    RSA = 2;
+    ELGAMAL = 3;
+  }
+
+  enum ObjectTypes {
+    LEDGER = 0;
+    IDENTITY = 1;
+    FINGERPRINT = 2;
+    FILE = 3;
+    CUSTOM = 4;
+  }
+
+  enum IssueMode {
+    NONE = 0;
+    ONCE = 1;
+    MULTI = 2;
+    SINGLETON = 3;
+  }
+
+  int32 version = 1;
+  string name = 2;
+  bytes id = 3;
+  bytes metadata = 4;
+  IssueMode issue_mode = 5;
+  ObjectTypes object_type = 6;
+  EncryptionTypes encryption = 7;
+  bytes encryption_key = 8;
+}
+
+message Transfer {
+  enum TransferType {
+    File = 0;
+    Custom = 1;
+    Ledger = 2;
+  }
+  message Output {
+    int32 amount = 1;
+    string destination = 2;
+  }
+  message Input {
+    bytes preimage = 1;
+    string signature = 2;
+  }
+
+  int32 version = 1;
+  string timestamp = 2;
+  bytes preimage = 3;
+  string metadata = 4; 
+  repeated Input inputs = 5;
+  repeated Output outputs = 6;
+}
+
+message Ledger {
+  int32 version = 1;
+  string issue_amount = 2;
+  int32 number_of_decimals = 3; 
+  string shortname = 4; 
+  string issue_expires = 5;
+}
+
+message Identity {
+  int32 version = 1;
+  bytes fingerprint = 2;
+  bytes public_key = 3;
+  string rsa_public_key = 4;
+}
+
+message Fingerprint {
+  int32 version = 1;
+  bytes fingerprint = 2;
+  bytes public_key = 3;
+  string rsa_public_key = 4;
+}
+
+message File {
+  enum EncryptionTypes {
+    UNENC = 0;
+    AES = 1;
+    RSA = 2;
+    ELGAMAL = 3;
+  }
+  int32 version = 1;
+  string address = 2;
+  string name = 4;
+  string file_type = 5;
+  string comment = 6;
+  EncryptionTypes encryption = 7;
+  bytes encryption_key = 8;
+}
+
+message News {
+  int32 version = 0;
+  string title = 1;
+  string content = 2;
+  string image = 3;
+  int32 debug = 4;
+}

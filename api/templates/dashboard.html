@@ -1,0 +1,340 @@
+{% extends 'base.html' %}
+{% block content %}
+		<div class="display-animation">
+			<div class="row image-row">
+				<div class="col-md-12">
+					<div class="row image-row">
+						<div class="col-sm-4">
+							<div class="row image-row">
+								<div class="col-md-12">
+									<div class="card tile card-dashboard-info card-deep-purple material-animate">
+										<div class="card-body">
+											<div class="card-action" id="XTO_Status"></div>
+											<div class="card-icon"><i class="ion ion-disc"></i></div><!--.card-icon-->
+											<h4>Tao Node Status</h4>
+											<p class="result" id="XTO_Balance">Calculating...</p>
+											<small id="XTOn_Balance">Calculating...</small>
+										</div>
+									</div><!--.card-->
+								</div><!--.col-->
+							</div><!--.row-->
+							<div class="row image-row">
+								<div class="col-md-12">
+									<div class="card tile card-dashboard-info card-indigo material-animate">
+										<div class="card-body">
+											<div class="card-icon"><i class="ion ion-arrow-swap"></i></div><!--.card-icon-->
+											<h4>Last Action</h4>
+											<p class="result"><a href="#">Asset Transfer</a></p>
+											<small>Fri, 21 Apr 2017 07:33:08 GMT</small>
+										</div>
+									</div><!--.card-->
+								</div><!--.col-->
+							</div><!--.row-->
+							<div class="row image-row">
+								<div class="col-md-12">
+									<div class="card tile card-dashboard-info card-light-blue material-animate">
+										<div class="card-body">
+											<div class="card-icon"><i class="ion ion-aperture"></i></div><!--.card-icon-->
+											<h4>Incoming Transfers</h4>
+											<p class="result">4</p>
+											<small>Total Mempool: 103</small>
+										</div>
+									</div><!--.card-->
+								</div><!--.col-->
+							</div><!--.row-->
+						</div><!--.col-->
+						<div class="col-sm-4">
+							<div class="row image-row">
+								<div class="col-md-12">
+									<div class="card tile card-dashboard-info card-orange material-animate">
+										<div class="card-body">
+											<div class="card-icon"><i class="fa fa-bitcoin"></i></div><!--.card-icon-->
+											<h4>Bitcoin Wallet</h4>
+											<p class="result" id="BTC_Balance">Calculating...</p>
+											<small>&nbsp;</small>
+										</div>
+									</div><!--.card-->
+								</div><!--.col-->
+							</div><!--.row-->
+							<div class="row image-row">
+								<div class="card tile card-dashboard-info card-blue-grey material-animate">
+									<div class="card-body">
+										<div class="card-action"><span class="badge badge-success">Active</span></div>
+										<div class="card-icon"><i class="ion ion-cube"></i></div><!--.card-icon-->
+										<h4>IPFS Node Status</h4>
+										<p class="result">1,401 Files in 3.237GB</p>
+										<small>Peers: 27</small>
+									</div>
+								</div><!--.card-->
+							</div>							
+							<div class="row image-row">
+								<div class="col-md-12">
+									<div class="card tile card-dashboard-info card-green material-animate">
+										<div class="card-body">
+											<div class="card-icon"><i class="ion ion-cash"></i></div><!--.card-icon-->
+											<h4>Total IP Ledger Market Cap</h4>
+											<p class="result">$403,400</p>
+											<small>In 10,240 Assets</small>
+										</div>
+									</div><!--.card-->
+								</div><!--.col-->
+							</div><!--.row-->
+						</div><!--.col-->
+						<div class="col-sm-4">
+							<div class="card tile card-news-more material-animate material-animated" style="animation-delay: 1s;">
+								<div class="card-heading bg-image bg-opaque5 sample-bg-image29">
+									<div class="heading-content">
+										<span class="badge">LATEST NEWS</span>
+										<span class="headline">Welcome to Infiniti!</span>
+										<button class="btn btn-floating btn-pink toggle-card-news-more btn-ripple"><i class="ion-eye"></i></button>
+									</div>
+								</div><!--.card-heading-->
+								<div class="card-body">
+									<small> Fri, 21 Apr 2017 07:33:08 GMT</small>
+									<p>We couldn't be more excited about the launch of the Infiniti Protocol, representing the pinnacle of hundreds of hours of efforts by our wonderful team!</p>
+									<p>During this beta period, please excuse our dust. Some things may not work properly and some things may not work at all.  Don't hesitate to drop by #infiniti on the Tao Slack server to share your experiences!</p>
+									<p>Based on your feedback we will be releasing a new version in a few weeks... and then the fun really begins!  Thank you for all of your support!</p>
+									<small>- The Infiniti Protocol Team</small>
+								</div><!--.card-body-->
+							</div>
+						</div><!--.col-->
+					</div><!--.row-->
+				</div><!--.col-->
+			</div><!--.row-->
+			<div class="row image-row">
+				<div class="col-md-4">
+					<div class="row image-row">
+						<div class="panel green">
+							<div class="panel-heading">
+								<div class="panel-title"><h4>Live Mempool</h4></div>
+							</div><!--.panel-heading-->
+							<div class="panel-body without-padding">
+								<ul class="list-material has-hidden">
+									<li class="has-action-right">
+										<a href="#" class="hidden"><i class="fa fa-binoculars"></i></a>
+										<a href="#" class="visible">
+											<div class="list-content">
+												<span class="caption">This is a caption</span>
+											</div>
+										</a>
+									</li>
+									<li class="has-action-right">
+										<a href="#" class="hidden"><i class="fa fa-binoculars"></i></a>
+										<a href="#" class="visible">
+											<div class="list-content">
+												<span class="caption">This is a caption</span>
+											</div>
+										</a>
+									</li>
+									<li class="has-action-right">
+										<a href="#" class="hidden"><i class="fa fa-binoculars"></i></a>
+										<a href="#" class="visible">
+											<div class="list-content">
+												<span class="caption">This is a caption</span>
+											</div>
+										</a>
+									</li>
+									<li class="has-action-right">
+										<a href="#" class="hidden"><i class="fa fa-binoculars"></i></a>
+										<a href="#" class="visible">
+											<div class="list-content">
+												<span class="caption">This is a caption</span>
+											</div>
+										</a>
+									</li>
+									<li class="has-action-right">
+										<a href="#" class="hidden"><i class="fa fa-binoculars"></i></a>
+										<a href="#" class="visible">
+											<div class="list-content">
+												<span class="caption">This is a caption</span>
+											</div>
+										</a>
+									</li>
+								</ul>
+							</div><!--.panel-body-->
+						</div><!--.panel-->
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="row image-row">
+						<div class="panel orange">
+							<div class="panel-heading">
+								<div class="panel-title"><h4>My Last 5 Transactions</h4></div>
+							</div><!--.panel-heading-->
+							<div class="panel-body without-padding">
+								<ul class="list-material has-hidden">
+									<li class="has-action-right">
+										<a href="#" class="hidden"><i class="fa fa-binoculars"></i></a>
+										<a href="#" class="visible">
+											<div class="list-content">
+												<span class="caption">This is a caption</span>
+											</div>
+										</a>
+									</li>
+									<li class="has-action-right">
+										<a href="#" class="hidden"><i class="fa fa-binoculars"></i></a>
+										<a href="#" class="visible">
+											<div class="list-content">
+												<span class="caption">This is a caption</span>
+											</div>
+										</a>
+									</li>
+									<li class="has-action-right">
+										<a href="#" class="hidden"><i class="fa fa-binoculars"></i></a>
+										<a href="#" class="visible">
+											<div class="list-content">
+												<span class="caption">This is a caption</span>
+											</div>
+										</a>
+									</li>
+									<li class="has-action-right">
+										<a href="#" class="hidden"><i class="fa fa-binoculars"></i></a>
+										<a href="#" class="visible">
+											<div class="list-content">
+												<span class="caption">This is a caption</span>
+											</div>
+										</a>
+									</li>
+									<li class="has-action-right">
+										<a href="#" class="hidden"><i class="fa fa-binoculars"></i></a>
+										<a href="#" class="visible">
+											<div class="list-content">
+												<span class="caption">This is a caption</span>
+											</div>
+										</a>
+									</li>
+								</ul>
+							</div><!--.panel-body-->
+						</div><!--.panel-->
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="row image-row">
+						<div class="panel blue">
+							<div class="panel-heading">
+								<div class="panel-title"><h4>Top 5 Ledgers By Market Capitalization</h4></div>
+							</div><!--.panel-heading-->
+							<div class="panel-body without-padding">
+								<ul class="list-material has-hidden">
+									<li class="has-action-right">
+										<a href="#" class="hidden"><i class="fa fa-binoculars"></i></a>
+										<a href="#" class="visible">
+											<div class="list-content">
+												<span class="caption">This is a caption</span>
+											</div>
+										</a>
+									</li>
+									<li class="has-action-right">
+										<a href="#" class="hidden"><i class="fa fa-binoculars"></i></a>
+										<a href="#" class="visible">
+											<div class="list-content">
+												<span class="caption">This is a caption</span>
+											</div>
+										</a>
+									</li>
+									<li class="has-action-right">
+										<a href="#" class="hidden"><i class="fa fa-binoculars"></i></a>
+										<a href="#" class="visible">
+											<div class="list-content">
+												<span class="caption">This is a caption</span>
+											</div>
+										</a>
+									</li>
+									<li class="has-action-right">
+										<a href="#" class="hidden"><i class="fa fa-binoculars"></i></a>
+										<a href="#" class="visible">
+											<div class="list-content">
+												<span class="caption">This is a caption</span>
+											</div>
+										</a>
+									</li>
+									<li class="has-action-right">
+										<a href="#" class="hidden"><i class="fa fa-binoculars"></i></a>
+										<a href="#" class="visible">
+											<div class="list-content">
+												<span class="caption">This is a caption</span>
+											</div>
+										</a>
+									</li>
+								</ul>
+							</div><!--.panel-body-->
+						</div><!--.panel-->
+					</div>
+				</div>
+			</div>
+		</div><!--.display-animation-->
+{% endblock %}
+{% block script %}
+	<script>
+	function xto_status(){
+		$.ajax({
+			url: 'http://127.0.0.1:8000/ui/get_node_status/XTO',
+           	type: 'POST',
+			contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+			success: function(data) {
+				if (data['status'] == 'OK') {
+					$('#XTO_Status').html('<span class="badge badge-success">Active</span>');
+				}
+				if (data['status'] == 'OFFLINE') {
+					$('#XTO_Status').html('<span class="badge badge-error">OFFLINE</span>');
+				}
+				if (data['status'] == 'SYNC') {
+					$('#XTO_Status').html('<span class="badge badge-warning">Synchronizing</span>');
+				}
+			},
+			error: function() {
+				Index.createNotification('Cannot contact IP Server!');
+			}
+		});
+	}
+	function xto_getbalance(){
+		$.ajax({
+			url: 'http://127.0.0.1:8000/ui/get_balance/XTO',
+           	type: 'POST',
+			contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+			success: function(data) {
+				$('#XTO_Balance').html('Identities Balance: ' + data['balance'] + ' XTO');
+			},
+			error: function() {
+				Index.createNotification('Cannot contact IP Server!');
+			}
+		});
+		$.ajax({
+			url: 'http://127.0.0.1:8000/ui/get_balance/XTOn',
+           	type: 'POST',
+			contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+			success: function(data) {
+				$('#XTOn_Balance').html('Node Balance: ' + data['balance'] + ' XTO');
+			},
+			error: function() {
+				Index.createNotification('Cannot contact IP Server!');
+			}
+		});
+	}
+	function btc_getbalance(){
+		$.ajax({
+			url: 'http://127.0.0.1:8000/ui/get_balance/BTC',
+           	type: 'POST',
+			contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+			success: function(data) {
+				$('#BTC_Balance').html('Identities Balance: ' + data['balance'] + ' BTC');
+			},
+			error: function() {
+				Index.createNotification('Cannot contact IP Server!');
+			}
+		});
+	}
+	$(document).ready(function () {
+		xto_status();
+		xto_getbalance();
+		btc_getbalance();
+		var r = setInterval(xto_status, 1000 * 5); // Every 5 seconds
+		var x = setInterval(xto_getbalance, 1000 * 60 * 5); // Every five minutes
+		var l = setInterval(btc_getbalance, 1000 * 60 * 7); // Every seven minutes
+	});
+	</script>
+{% endblock %}

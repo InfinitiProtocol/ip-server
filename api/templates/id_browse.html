@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+{% block head %}
+	<!-- BEGIN PLUGINS CSS -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='plugins/datatables/media/css/jquery.dataTables.min.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='plugins/datatables/themes/bootstrap/dataTables.bootstrap.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/plugins.css') }}">
+	<!-- END PLUGINS CSS -->
+{% endblock %}
+{% block content %}
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel">
+					<div class="panel-heading">
+						<div class="col-md-2">
+							<div class="panel-title"><h4>IDENTITY BROWSER</h4></div>
+						</div>
+						<div class="col-md-10"><span data-toggle="modal" data-target="#createModal" >
+							<a class="btn btn-floating" data-toggle="tooltip" title="Create new identity." data-placement="bottom"><i class="ion-android-add"></i></a></span>					
+						</div>
+					</div><!--.panel-heading-->
+					<div class="panel-body">
+						<div class="row no-gutters">
+							<div class="styled-tabs tab-primary">
+								<div class="col-md-12">
+									<div class="col-md-3">
+										<ul class="nav nav-tabs tabs-left">
+											<li class="active"><a href="#local" data-toggle="tab" aria-expanded="true">Local Identities</a></li>
+											<li class=""><a href="#all" data-toggle="tab" aria-expanded="false">All Identities</a></li>
+										</ul>
+									</div>
+									<div class="col-md-9">
+										<div class="tab-content">
+											<div class="tab-pane active" id="local">
+												<div class="overflow-table">
+												<table id="local_ids" class="display datatables-serverside-row-details">
+													<thead>
+														<tr>
+															<th>Name</th>
+															<th>Fingerprint</th>
+															<th>Infiniti Address</th>
+														</tr>
+													</thead>
+												</table>
+												</div>
+											</div>
+											<div class="tab-pane" id="all">
+												<div class="overflow-table">
+												<table id="all_ids" class="display datatables-serverside-row-details">
+													<thead>
+														<tr>
+															<th>Name</th>
+															<th>Fingerprint</th>
+															<th>Infiniti Address</th>
+														</tr>
+													</thead>
+												</table>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="clearfix"></div>
+								</div><!--.col-md-6-->
+							</div><!--.styled-tabs-->
+						</div><!--.row-->
+					</div><!--.panel-body-->
+				</div><!--.panel-->
+			</div><!--.col-md-12-->
+		</div><!--.row-->
+
+		<!-- Modals -->
+		<div class="modal scale fade" id="createModal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Create Identity</h4>
+					</div>
+					<div class="modal-body">
+						<div class="inputer floating-label">
+							<p>Please name your new identity.  Your identity will be created when you click "Continue".  The passphrase is stored locally and is never sent to anyone.
+							<div class="input-wrapper">
+								<input type="text" class="form-control" id="idNameInput">
+								<label for="idNameInput">Your New Identity Name</label>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-flat btn-default" data-dismiss="modal">Cancel</button>
+						<button type="button" class="btn btn-flat btn-primary" onclick="createIdentity();">Continue</button>
+					</div>
+				</div><!--.modal-content-->
+			</div><!--.modal-dialog-->
+		</div><!--.modal-->
+
+{% endblock %}
+{% block script %}
+	<!-- BEGIN PLUGINS AREA -->
+	<script src="{{ url_for('static', filename='plugins/datatables/media/js/jquery.dataTables.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='plugins/datatables/themes/bootstrap/dataTables.bootstrap.js') }}"></script>
+	<!-- END PLUGINS AREA -->		
+	<!-- PLUGINS INITIALIZATION AND SETTINGS -->
+	<script src="{{ url_for('static', filename='scripts/tables-datatables-sources.js') }}"></script>
+	<!-- END PLUGINS INITIALIZATION AND SETTINGS -->
+	<!-- BEGIN INITIALIZATION-->
+	<script>
+	function createIdentity()
+	{
+		$.ajax({
+			url: 'http://{{ rpc_user }}:{{ rpc_password }}@127.0.0.1:8000/api/create_identity',
+           	type: 'POST',
+			contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            data: JSON.stringify({ name: $('#idNameInput').val() }),
+			success: function(data) {
+				$('#createModal').modal('toggle');
+				Index.createNotification('Identity created.');
+				TablesDataTablesSources.reload();
+			},
+			error: function() {
+				$('#createModal').modal('toggle');
+				Index.createNotification('Creation failed.  See web log for details.');
+			}
+		});		
+	}
+	$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+		var target = $(e.target).attr("href") // activated tab
+		if (target == "#all") {
+			TablesDataTablesSources.sourceJs(true);
+		} else {
+			TablesDataTablesSources.sourceJs(false);
+		}
+	});
+	$('#createModal').on('shown.bs.modal', function (e) {
+	  $('#idNameInput').val('');
+	})	
+	$(document).ready(function () {
+		TablesDataTablesSources.init();
+		$('#local_ids tbody').on( 'click', 'tr', function () {
+			var t1 = $('#local_ids').DataTable();
+	        var data = t1.row( this ).data();
+	        alert( 'You clicked on '+data[0]+'\'s row' );
+		} );
+		$('#all_ids tbody').on( 'click', 'tr', function () {
+			var t2 = $('#all_ids').DataTable();
+	        var data = t2.row( this ).data();
+	        alert( 'You clicked on '+data[0]+'\'s row' );
+		} );
+	});
+	</script>
+	<!-- END INITIALIZATION-->
+
+{% endblock %}

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>infiniti protocol Dashboard</title>
+
+	<meta name="description" content="infiniti protocol Dashboard">
+	<meta name="author" content="The infiniti Team">
+
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="apple-touch-fullscreen" content="yes">
+
+	<!-- BEGIN CORE CSS -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/admin1.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/elements.css') }}">
+	<!-- END CORE CSS -->
+
+	<!-- BEGIN PLUGINS CSS -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='plugins/rickshaw/rickshaw.min.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='plugins/bxslider/jquery.bxslider.css') }}">
+
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/plugins.css') }}">
+	<!-- END PLUGINS CSS -->
+
+	<!-- BEGIN SHORTCUT AND TOUCH ICONS -->
+	<link rel="shortcut icon" href="{{ url_for('static', filename='img/icons/favicon.ico') }}">
+	<link rel="apple-touch-icon" href="{{ url_for('static', filename='img/icons/apple-touch-icon.png') }}">
+	<!-- END SHORTCUT AND TOUCH ICONS -->
+
+	<script src="{{ url_for('static', filename='plugins/modernizr/modernizr.min.js') }}"></script>
+	<!-- BEGIN GLOBAL AND THEME VENDORS -->
+	<script src="{{ url_for('static', filename='js/global-vendors.js') }}"></script>
+	<!-- END GLOBAL AND THEME VENDORS -->
+	{% block head %}
+	{% endblock %}
+
+</head>
+<body>
+
+	<div class="nav-bar-container">
+
+		<!-- BEGIN ICONS -->
+		<div class="nav-menu">
+			<div class="hamburger">
+				<span class="patty"></span>
+				<span class="patty"></span>
+				<span class="patty"></span>
+				<span class="patty"></span>
+				<span class="patty"></span>
+				<span class="patty"></span>
+			</div><!--.hamburger-->
+		</div><!--.nav-menu-->
+
+		<div class="nav-search">
+			<span class="search"></span>
+		</div><!--.nav-search-->
+
+		<!-- END OF ICONS -->
+
+		<div class="nav-bar-border"></div><!--.nav-bar-border-->
+
+		<!-- BEGIN OVERLAY HELPERS -->
+		<div class="overlay">
+			<div class="starting-point">
+				<span></span>
+			</div><!--.starting-point-->
+			<div class="logo">infiniti protocol</div><!--.logo-->
+		</div><!--.overlay-->
+
+		<div class="overlay-secondary"></div><!--.overlay-secondary-->
+		<!-- END OF OVERLAY HELPERS -->
+
+	</div><!--.nav-bar-container-->
+
+	<div class="content">
+		<div class="page-header full-content">
+			<div class="row">
+				<div class="col-sm-6">
+					<h1><img src="{{ url_for('static', filename='img/logo.png') }}" alt="infiniti protocol">&nbsp;infiniti protocol</h1>
+				</div><!--.col-->
+				<div class="col-sm-6">
+					<ol class="breadcrumb">
+						<li><a href="/" class="active"><i class="ion-home"></i> Dashboard</a></li>
+						<li><a href="{{ breadcrumb_url }}" class="active">{{ breadcrumb }}</a></li>
+					</ol>
+				</div><!--.col-->
+			</div><!--.row-->
+		</div><!--.page-header-->
+		{% block content %}
+		{% endblock %}
+		<div class="footer-links margin-top-40">
+			<div class="row no-gutters bg-blue">
+				<div class="col-xs-6">
+				<a>
+					<span>Donate to Infiniti Protocol Development</span>
+					<span class="state">BTC: 1C3J3GTzwFtqjWMHVW1Sy5pytorAyxfSF9</span>
+					<span class="state">XTO: TkM72S91oAUfi7Z17BzUyMnuS6rRpfDEU5</span>
+				</a>
+				</div><!--.col-->
+				<div class="col-xs-6">
+					<a href="http://tao.network" target="_blank">
+						<span class="state">Copyright 2017</span>
+						<span>Tao Network</span>
+					</a>
+				</div><!--.col-->
+			</div><!--.row-->
+		</div><!--.footer-links-->
+	</div><!--.content-->
+
+	<div class="layer-container">
+
+		<!-- BEGIN MENU LAYER -->
+		<div class="menu-layer">
+			<ul>
+				<li>
+					<a href="/">Dashboard</a>
+				</li>
+				<li class="has-child">
+					<a href="javascript:;">Identities</a>
+					<ul class="child-menu">
+						<li><a href="/id/browse">Browse</a><span class="hover-bg"></span></li>
+						<li><a href="/id/import">Import</a><span class="hover-bg"></span></li>
+					</ul>
+				</li>
+				<li>
+					<a href="javascript:;">Documents</a>
+					<ul class="child-menu">
+						<li><a href="/doc/browse">Browse</a><span class="hover-bg"></span></li>
+						<li><a href="/doc/register">Register</a><span class="hover-bg"></span></li>
+					</ul>
+				</li>
+				<li>
+					<a href="javascript:;">Ledgers</a>
+					<ul class="child-menu">
+						<li><a href="/ledger/balances">Balances</a><span class="hover-bg"></span></li>
+						<li><a href="/ledger/create">Create</a><span class="hover-bg"></span></li>
+					</ul>
+				</li>
+				<li>
+					<a href="javascript:;">Custom Objects</a>
+					<ul class="child-menu">
+						<li><a href="/obj/browse">Browse</a><span class="hover-bg"></span></li>
+						<li><a href="/obj/create">Create</a><span class="hover-bg"></span></li>
+					</ul>
+				</li>
+				<li>
+					<a href="/tx">Transaction History</a>
+				</li>
+				<li>
+					<a href="/dex">Decentralized Exchange</a>
+				</li>
+			</ul>
+		</div><!--.menu-layer-->
+		<!-- END OF MENU LAYER -->
+		<!-- BEGIN SEARCH LAYER -->
+		<div class="search-layer">
+			<div class="search">
+				<form action="pages-search-results.html">
+					<div class="form-group">
+						<input type="text" id="input-search" class="form-control" placeholder="type something">
+						<button type="submit" class="btn btn-default disabled"><i class="ion-search"></i></button>
+					</div>
+				</form>
+			</div><!--.search-->
+
+			<div class="results">
+				<div class="row">
+					<div class="col-md-4">
+						<div class="result result-users">
+							<h4>USERS <small>(3)</small></h4>
+
+							<ul class="list-material">
+								<li class="has-action-left">
+									<a href="#" class="hidden"><i class="ion-android-delete"></i></a>
+									<a href="#" class="visible">
+										<div class="list-action-left">
+											<img src="{{ url_for('static', filename='img/faces/1.jpg') }}" class="face-radius" alt="">
+										</div>
+										<div class="list-content">
+											<span class="title">Pari Subramanium</span>
+											<span class="caption">Legacy Response Assistant</span>
+										</div>
+									</a>
+								</li>
+								<li class="has-action-left">
+									<a href="#" class="hidden"><i class="ion-android-delete"></i></a>
+									<a href="#" class="visible">
+										<div class="list-action-left">
+											<img src="{{ url_for('static', filename='img/faces/10.jpg') }}" class="face-radius" alt="">
+										</div>
+										<div class="list-content">
+											<span class="title">Andrew Fox</span>
+											<span class="caption">National Branding Technician</span>
+										</div>
+									</a>
+								</li>
+								<li class="has-action-left">
+									<a href="#" class="hidden"><i class="ion-android-delete"></i></a>
+									<a href="#" class="visible">
+										<div class="list-action-left">
+											<img src="{{ url_for('static', filename='img/faces/11.jpg') }}" class="face-radius" alt="">
+										</div>
+										<div class="list-content">
+											<span class="title">Lieke Vermeulen</span>
+											<span class="caption">Global Tactics Consultant</span>
+										</div>
+									</a>
+								</li>
+							</ul>
+
+						</div><!--.results-user-->
+					</div><!--.col-->
+					<div class="col-md-4">
+						<div class="result result-posts">
+							<h4>POSTS <small>(5)</small></h4>
+
+							<ul class="list-material">
+								<li class="has-action-left">
+									<a href="#" class="hidden"><i class="ion-android-delete"></i></a>
+									<a href="#" class="visible">
+										<div class="list-action-left">
+											<img src="{{ url_for('static', filename='img/picjumbo/1.jpg') }}" class="img-radius" alt="">
+										</div>
+										<div class="list-content">
+											<span class="title">Mobile Trends for 2015</span>
+											<span class="caption">Collaboratively administrate empowered markets via plug-and-play networks.</span>
+										</div>
+									</a>
+								</li>
+								<li class="has-action-left">
+									<a href="#" class="hidden"><i class="ion-android-delete"></i></a>
+									<a href="#" class="visible">
+										<div class="list-action-left">
+											<img src="{{ url_for('static', filename='img/picjumbo/10.jpg') }}" class="img-radius" alt="">
+										</div>
+										<div class="list-content">
+											<span class="title">Interview with Phillip Riley</span>
+											<span class="caption">Dynamically procrastinate B2C users after installed base benefits.</span>
+										</div>
+									</a>
+								</li>
+								<li class="has-action-left">
+									<a href="#" class="hidden"><i class="ion-android-delete"></i></a>
+									<a href="#" class="visible">
+										<div class="list-action-left">
+											<img src="{{ url_for('static', filename='img/picjumbo/11.jpg') }}" class="img-radius" alt="">
+										</div>
+										<div class="list-content">
+											<span class="title">Workspaces</span>
+											<span class="caption">Dramatically visualize customer directed convergence without revolutionary ROI.</span>
+										</div>
+									</a>
+								</li>
+								<li class="has-action-left">
+									<a href="#" class="hidden"><i class="ion-android-delete"></i></a>
+									<a href="#" class="visible">
+										<div class="list-action-left">
+											<img src="{{ url_for('static', filename='img/picjumbo/5.jpg') }}" class="img-radius" alt="">
+										</div>
+										<div class="list-content">
+											<span class="title">Graphics &amp; Multimedia</span>
+											<span class="caption">Efficiently unleash cross-media information without cross-media value.</span>
+										</div>
+									</a>
+								</li>
+								<li class="has-action-left">
+									<a href="#" class="hidden"><i class="ion-android-delete"></i></a>
+									<a href="#" class="visible">
+										<div class="list-action-left">
+											<img src="{{ url_for('static', filename='img/picjumbo/6.jpg') }}" class="img-radius" alt="">
+										</div>
+										<div class="list-content">
+											<span class="title">Interactive Storytelling</span>
+											<span class="caption">Quickly maximize timely deliverables for real-time schemas.</span>
+										</div>
+									</a>
+								</li>
+							</ul>
+
+						</div><!--.results-posts-->
+					</div><!--.col-->
+					<div class="col-md-4">
+						<div class="result result-files">
+							<h4>FILES <small>(0)</small></h4>
+							<p>No results were found</p>
+						</div><!--.results-files-->
+					</div><!--.col-->
+
+				</div><!--.row-->
+			</div><!--.results-->
+		</div><!--.search-layer-->
+		<!-- END OF SEARCH LAYER -->
+
+	</div><!--.layer-container-->
+	{% block script %}
+	{% endblock %}
+	<!-- BEGIN PLUGINS AREA -->
+	<script src="{{ url_for('static', filename='plugins/bxslider/jquery.bxslider.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='plugins/audiojs/audiojs/audio.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='plugins/d3/d3.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='plugins/rickshaw/rickshaw.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='plugins/jquery-knob/excanvas.js') }}"></script>
+	<script src="{{ url_for('static', filename='plugins/jquery-knob/dist/jquery.knob.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='plugins/gauge/gauge.min.js') }}"></script>
+	<!-- END PLUGINS AREA -->
+
+	<!-- PLEASURE -->
+	<script src="{{ url_for('static', filename='js/pleasure.js') }}"></script>
+	<!-- ADMIN 1 -->
+	<script src="{{ url_for('static', filename='js/layout.js') }}"></script>
+
+	<script src="{{ url_for('static', filename='scripts/sliders.js') }}"></script>
+	<script src="{{ url_for('static', filename='scripts/maps-google.js') }}"></script>
+	<!--
+	<script src="{{ url_for('static', filename='scripts/widget-audio.js') }}"></script>
+	-->
+	<script src="{{ url_for('static', filename='scripts/charts-knob.js') }}"></script>
+	<script src="{{ url_for('static', filename='scripts/index.js') }}"></script>
+	<!-- BEGIN INITIALIZATION-->
+	<script>
+	$(document).ready(function () {
+		Pleasure.init();
+		Layout.init();
+
+		Index.init();
+		//WidgetAudio.single();
+		ChartsKnob.init();
+
+	});
+	</script>
+	<!-- END INITIALIZATION-->
+
+	<!-- BEGIN Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', Pleasure.settings.ga.urchin, Pleasure.settings.ga.url);
+		ga('send', 'pageview');
+	</script>
+	<!-- END Google Analytics -->
+
+</body>
+</html>
